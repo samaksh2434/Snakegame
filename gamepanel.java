@@ -1,4 +1,5 @@
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,10 +7,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class gamepanel extends JPanel 
+public class gamepanel extends JPanel implements KeyListener,ActionListener 
+
 {
+    
 
     public gamepanel(){
+        this.addKeyListener(this);
+        this.setFocusable(true);
         
     }
 
@@ -69,6 +74,47 @@ public class gamepanel extends JPanel
 
     }
 
+ @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        
+    }
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+        if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+            System.out.println("right");
 
+        }
+        if(e.getKeyCode()==KeyEvent.VK_LEFT){
+            System.out.println("left");
+        }
+        if(e.getKeyCode()==KeyEvent.VK_UP){
+            System.out.println("up");
+        }
+        if(e.getKeyCode()==KeyEvent.VK_DOWN){
+            System.out.println("down");
+        }
+
+        
+        
+    }
+
+
+
+
+
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+        
+    }
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+        
+   
+    }
 
 }

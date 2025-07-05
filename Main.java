@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 public class Main {
     static int Frame_width=800;
     static int Frame_height=600;
-    
+
 
     public static void main(String[] args) {
 
@@ -20,10 +20,11 @@ public class Main {
         f.setBounds(100,100,Frame_width,Frame_height);
         gamepanel p=new gamepanel();
         f.add(p);
+        f.addKeyListener(p);
+        
         
 
 
         
-  
     }
 }
