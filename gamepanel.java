@@ -1,11 +1,14 @@
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 
 public class gamepanel extends JPanel implements KeyListener,ActionListener 
 
@@ -14,6 +17,9 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
     public int[] ypos=new int[999999];
     { xpos[0]=100;
     ypos[0]=100;}
+
+    Timer timer;
+    public int speed=100;
     
     
     public int snakelenght=9;
@@ -22,13 +28,15 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
     final int DOWN = 1;
     final int LEFT = 2;
     final int RIGHT = 3;
-    int direction = DOWN;
+    int direction = RIGHT;
      // initial direction
     
     public gamepanel(){
         
         this.addKeyListener(this);
         this.setFocusable(true);
+        timer=new Timer(speed,this);
+        timer.start();
         
     }
 
@@ -103,16 +111,44 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
         
 
         
+    
+
     }
     
 
-    //THIS IS THE INPUT AREA HERE THE USER INPUTS ARE TAKEN INTO ACCOUNT
-
+    
+// this is resposible for the movement of the snake
  @Override
+ 
     public void actionPerformed(ActionEvent e) {
+        xpos[ti]=xpos[0];
+        ypos[ti]=ypos[0];
+        
+       if (direction==UP){
+           ypos[0]=ypos[0]-20;
+           repaint();
+           ti++;
+       }
+       if(direction==DOWN){
+           ypos[0]=ypos[0]+20;
+           repaint();
+           ti++;
+       }
+       if(direction==LEFT){
+           xpos[0]=xpos[0]-20;
+           repaint();
+           ti++;
+       }
+       if(direction==RIGHT){
+           xpos[0]=xpos[0]+20;
+           repaint();
+           ti++;
+        
+       }
         
         
     }
+    //THIS IS THE INPUT AREA HERE THE USER INPUTS ARE TAKEN INTO ACCOUNT
     @Override
     public void keyPressed(KeyEvent e) {
             
@@ -196,9 +232,6 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
     }
     @Override
     public void keyTyped(KeyEvent e) {
-        
-        
-   
     }
 
 }
