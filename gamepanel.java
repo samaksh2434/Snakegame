@@ -8,21 +8,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
+
 
 
 public class gamepanel extends JPanel implements KeyListener,ActionListener 
 
 {
-    public int[] xpos=new int[999999];
-    public int[] ypos=new int[999999];
+    public int[] xpos=new int[9999999];
+    public int[] ypos=new int[9999999];
     { xpos[0]=100;
     ypos[0]=100;}
 
     Timer timer;
-    public int speed=100;
+    public int speed=200;
+    Random r=new Random();
+    public int applex=r.nextInt(25,750);
+    public int appley=r.nextInt(100,500);
     
     
-    public int snakelenght=9;
+    public int snakelenght=1;
     int ti=snakelenght;    
     final int UP = 0;
     final int DOWN = 1;
@@ -30,7 +35,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
     final int RIGHT = 3;
     int direction = RIGHT;
      // initial direction
-    
+     
     public gamepanel(){
         
         this.addKeyListener(this);
@@ -39,6 +44,11 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
         timer.start();
         
     }
+    
+        
+
+    
+
 
 
   
@@ -47,6 +57,8 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
 
 
     public void paint(Graphics g){
+        System.out.println(snakelenght+"sppeed ki wvalue"+speed);
+        
          
         
         //titele    bar
@@ -71,16 +83,19 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
 
         //snakes body is here with the snake body arrray named slenght a= SNAKE LENGHT
         
+
+        
         
         int[] slength=new int[snakelenght];
         
         //this loop will assingn the number in the slenth array
-        for(int i=0;i<slength.length;i++){
+        for(int i=0;i<snakelenght;i++){
             slength[i]=i;
-            
         }
         
         
+        
+
         //this loop will print the snake
         for(int i=0;i<slength.length;i++){
 
@@ -98,15 +113,26 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
                 image = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\Screenshot 2025-07-05 172452.png").getImage();
                 g.drawImage(image, xpos[ti-i], ypos[ti-i], 20, 20, null);
                 // System.out.println(xpos[ti-i]+" "+ypos[ti-i]);
+                
             }
+
+
+
+            //this will print the apple
+            
+
+            Image image;
+            image = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\download-removebg-preview.png").getImage();
+            g.drawImage(image, applex, appley, 20, 20, null);
+            // System.out.println(applex+" apple "+appley);
+            // System.out.println(xpos[0]+" snake head "+ypos[0]);
+            
+
+            
            
 
             
         }
-
-        
-
-
         
         
 
@@ -114,6 +140,9 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
     
 
     }
+    
+    
+    
     
 
     
@@ -145,9 +174,36 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
            ti++;
         
        }
+
+       //this is the condition for the snake to die
+       if(xpos[0]<22||xpos[0]>745||ypos[0]<90||ypos[0]>540){
+        timer.stop();
+        System.out.println("game over");
+       }
+
+         // condition for the the apple of the snake 
+       if (Math.abs(xpos[0] - applex) < 50 && Math.abs(ypos[0] - appley) < 50) {
+        System.out.println("Collision detected!");
+        repaint();
+        applex=r.nextInt(25,750);
+        appley=r.nextInt(100,500);
         
         
+        // Add code to handle collision here
+        // For example, you can increase the snake length
+        snakelenght++;
+        //here the speed of the snake is been regulated
+        if(speed<=10){speed=speed-1;}
+        if(speed>10&&speed<=20){speed=speed-2;}
+        if(speed>20&&speed<=50){speed=speed-5;}
+        if(speed>50&&speed<=100){speed=speed-10;} 
+        if(speed>100&&speed<=200){speed=speed-50;}// increase the speed by 10
+        timer.setDelay(speed);
     }
+}
+        
+        
+    
     //THIS IS THE INPUT AREA HERE THE USER INPUTS ARE TAKEN INTO ACCOUNT
     @Override
     public void keyPressed(KeyEvent e) {
