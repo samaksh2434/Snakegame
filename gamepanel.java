@@ -78,21 +78,21 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
         
         //titele    bar
         g.setColor(Color.blue);
-        g.drawRect(20, 10, 745, 75);
-        g.fillRect(23, 13, 740, 70);
+        g.drawRect(20, 10, 1045, 375);
+        g.fillRect(23, 13, 1040, 370);
 
         // image of the title
-        ImageIcon c =new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\images-removebg-preview.png");
-        g.drawImage(c.getImage(), 30, 0, 100, 100, null);
-         c =new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\images-removebg-preview.png");
-        g.drawImage(c.getImage(), 660, 0, 100, 100, null);
+        ImageIcon c =new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\WhatsApp_Image_2025-07-07_at_16.23.46_56784e00-removebg-preview.png");
+        g.drawImage(c.getImage(), 100, -20, 200, 150, null);
+         c =new ImageIcon("C:\\\\Users\\\\RealS\\\\Documents\\\\GitHub\\\\Snakegame\\\\WhatsApp_Image_2025-07-07_at_16.23.46_56784e00-removebg-preview.png");
+        g.drawImage(c.getImage(), 800, -20, 200, 150, null);
 
         
        
 // this is the window of the game
         g.setColor(Color.black);
-        g.drawRect(20, 90, 745, 455);
-        g.fillRect(23, 93, 740, 450);
+        g.drawRect(20, 90, 1045, 755);
+        g.fillRect(23, 93, 1040, 750);
 
         
 
@@ -114,19 +114,31 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
         //this loop will print the snake
         for(int i=0;i<slength.length;i++){
 
-            if(slength[i]==0){
-                Image image;
-                image = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\Screenshot 2025-07-05 172554.png").getImage();
-                g.drawImage(image, xpos[0], ypos[0], 20, 20, null);
-                //  System.out.println(xpos[0]+" "+ypos[0]);
-            }
+            if (slength[i] == 0) {
+    Image headImage = null;
+    if (direction == UP) {
+        headImage = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\up.png").getImage(); // Head facing UP
+    g.drawImage(headImage, xpos[0], ypos[0]-30, 50, 50, null);} 
+    else if (direction == DOWN) {
+        headImage = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\down.png").getImage(); // Head facing DOWN
+    g.drawImage(headImage, xpos[0], ypos[0]+30, 50, 50, null);}
+     else if (direction == LEFT) {
+        headImage = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\left.png").getImage(); // Head facing LEFT
+    g.drawImage(headImage, xpos[0]-30, ypos[0], 50, 50, null);
+}    else if (direction == RIGHT) {
+        headImage = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\right.png").getImage(); // Head facing RIGHT
+    g.drawImage(headImage, xpos[0]+30, ypos[0], 50, 50, null);}
+
+    // g.drawImage(headImage, xpos[0]+, ypos[0], 50, 50, null);
+}
+
             
 
             if(slength[i]>0){
                 
                 Image image;
                 image = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\Screenshot 2025-07-05 172452.png").getImage();
-                g.drawImage(image, xpos[ti-i], ypos[ti-i], 20, 20, null);
+                g.drawImage(image, xpos[ti-i], ypos[ti-i], 50, 50, null);
                 // System.out.println(xpos[ti-i]+" "+ypos[ti-i]);
                 
             }
@@ -137,8 +149,8 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             
 
             Image image;
-            image = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\download-removebg-preview.png").getImage();
-            g.drawImage(image, applex, appley, 20, 20, null);
+            image = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\egg.png").getImage();
+            g.drawImage(image, applex, appley, 50, 50, null);
             // System.out.println(applex+" apple "+appley);
             // System.out.println(xpos[0]+" snake head "+ypos[0]);
 
@@ -148,14 +160,14 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             g.drawString("Score: "+(snakelenght-3), 350, 55);
 
             /// this will die the snake and gameover messge will be showed
-            if (xpos[0] < 22 || xpos[0] > 745 || ypos[0] < 90 || ypos[0] > 540) {
+            if (xpos[0] < 22 || xpos[0] > 950 || ypos[0] < 90 || ypos[0] > 750) {
     timer.stop();
     playSound("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\gameover.wav");  // ← gameover.wav
     System.out.println("game over");
     g.setColor(Color.white);
     Font font = new Font("Arial", Font.BOLD, 20);
     String newline = System.lineSeparator();
-    g.drawString("Game Over " + newline + "Press Enter to Play Again", 220, 300);
+    g.drawString("Game Over " + newline + "Press Enter to Play Again", 350, 425);
 }
 
 
@@ -219,7 +231,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
     //    }
 
          // condition for the the apple of the snake 
-       if (Math.abs(xpos[0] - applex) < 20 && Math.abs(ypos[0] - appley) < 20) {
+       if (Math.abs(xpos[0] - applex) < 50 && Math.abs(ypos[0] - appley) < 50) {
     playSound("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\Ding - Sound Effect (HD).wav");  // ← apple.wav
     repaint();
     applex = r.nextInt(25, 750);
