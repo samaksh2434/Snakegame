@@ -27,7 +27,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
     public int appley=r.nextInt(100,500);
     
     
-    public int snakelenght=1;
+    public int snakelenght=3;
     int ti=snakelenght;    
     final int UP = 0;
     final int DOWN = 1;
@@ -57,7 +57,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
 
 
     public void paint(Graphics g){
-        System.out.println(snakelenght+"sppeed ki wvalue"+speed);
+        // System.out.println(snakelenght+"sppeed ki wvalue"+speed);
         
          
         
@@ -126,6 +126,24 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             g.drawImage(image, applex, appley, 20, 20, null);
             // System.out.println(applex+" apple "+appley);
             // System.out.println(xpos[0]+" snake head "+ypos[0]);
+
+            // this will print the score of the game
+            g.setColor(Color.white);
+            g.setFont(getFont().deriveFont(20f));
+            g.drawString("Score: "+(snakelenght-3), 350, 55);
+
+            /// this will die the snake and gameover messge will be showed
+            if(xpos[0]<22||xpos[0]>745||ypos[0]<90||ypos[0]>540){
+            timer.stop();
+            System.out.println("game over");
+            g.setColor(Color.white);
+            Font font = new Font("Arial", Font.BOLD, 20);
+            String newline = System.lineSeparator();
+            g.drawString("Game Over "+newline+"Press Enter to Play Again", 220, 300);
+
+
+        
+       }
             
 
             
@@ -176,14 +194,15 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
        }
 
        //this is the condition for the snake to die
-       if(xpos[0]<22||xpos[0]>745||ypos[0]<90||ypos[0]>540){
-        timer.stop();
-        System.out.println("game over");
-       }
+    //    if(xpos[0]<22||xpos[0]>745||ypos[0]<90||ypos[0]>540){
+    //     timer.stop();
+    //     System.out.println("game over");
+
+    //    }
 
          // condition for the the apple of the snake 
-       if (Math.abs(xpos[0] - applex) < 50 && Math.abs(ypos[0] - appley) < 50) {
-        System.out.println("Collision detected!");
+       if (Math.abs(xpos[0] - applex) < 20 && Math.abs(ypos[0] - appley) < 20) {
+        // System.out.println("Collision detected!");
         repaint();
         applex=r.nextInt(25,750);
         appley=r.nextInt(100,500);
@@ -192,6 +211,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
         // Add code to handle collision here
         // For example, you can increase the snake length
         snakelenght++;
+        
         //here the speed of the snake is been regulated
         if(speed<=10){speed=speed-1;}
         if(speed>10&&speed<=20){speed=speed-2;}
@@ -212,9 +232,27 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             xpos[ti]=xpos[0];
             ypos[ti]=ypos[0];
 
+            if(e.getKeyCode()==KeyEvent.VK_ENTER){
+         // Reset game state
+          snakelenght = 3;
+          speed=200;
+          timer.setDelay(speed);
+           xpos[0] = 100;
+           ypos[0] = 100;
+           xpos[ti]=xpos[0];
+           ypos[ti]=ypos[0]; 
+           direction = 'r';
+           
+           timer.stop();
+           
+           timer.start();
+           
+            repaint();
+}
+
             System.out.println(direction);
         
-        if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+        if(e.getKeyCode()==KeyEvent.VK_RIGHT||e.getKeyCode()==KeyEvent.VK_D){
             if(direction!= LEFT){
                 direction=RIGHT;
                 System.out.println("right");
@@ -230,7 +268,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             
 
         }
-        if(e.getKeyCode()==KeyEvent.VK_LEFT){
+        if(e.getKeyCode()==KeyEvent.VK_LEFT||e.getKeyCode()==KeyEvent.VK_A){
             if(direction!= RIGHT){
                 direction=LEFT;
                 System.out.println("left");
@@ -241,7 +279,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
              
             
         }
-        if(e.getKeyCode()==KeyEvent.VK_UP){
+        if(e.getKeyCode()==KeyEvent.VK_UP||e.getKeyCode()==KeyEvent.VK_W){
             
             if(direction!= DOWN){
                 direction=UP;
@@ -256,7 +294,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             
         }
 
-        if(e.getKeyCode()==KeyEvent.VK_DOWN){
+        if(e.getKeyCode()==KeyEvent.VK_DOWN||e.getKeyCode()==KeyEvent.VK_S){
             if(direction!=UP){
                 direction=DOWN;
                 System.out.println("down");
@@ -264,6 +302,19 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             repaint();
              ti++;
             }
+
+//         if(e.getKeyCode()==KeyEvent.VK_ENTER){
+//     // Reset game state
+//     snakelenght = 3;
+//     xpos = new int[100];
+//     ypos = new int[100];
+//     xpos[0] = 100;
+//     ypos[0] = 100;
+//     direction = 'r';
+//     timer.stop();
+//     timer.start();
+//     repaint();
+// }
         }
     }  
              
