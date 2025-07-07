@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioInputStream;
+import java.io.File;
 
 
 
@@ -44,7 +48,18 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
         timer.start();
         
     }
-    
+    // this will be used to make sound in the game
+    public void playSound(String filePath) {
+    try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+    } catch (Exception ex) {
+        System.out.println("Error playing sound: " + ex.getMessage());
+    }
+}
+
         
 
     
@@ -133,13 +148,16 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             g.drawString("Score: "+(snakelenght-3), 350, 55);
 
             /// this will die the snake and gameover messge will be showed
-            if(xpos[0]<22||xpos[0]>745||ypos[0]<90||ypos[0]>540){
-            timer.stop();
-            System.out.println("game over");
-            g.setColor(Color.white);
-            Font font = new Font("Arial", Font.BOLD, 20);
-            String newline = System.lineSeparator();
-            g.drawString("Game Over "+newline+"Press Enter to Play Again", 220, 300);
+            if (xpos[0] < 22 || xpos[0] > 745 || ypos[0] < 90 || ypos[0] > 540) {
+    timer.stop();
+    playSound("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\gameover.wav");  // ← gameover.wav
+    System.out.println("game over");
+    g.setColor(Color.white);
+    Font font = new Font("Arial", Font.BOLD, 20);
+    String newline = System.lineSeparator();
+    g.drawString("Game Over " + newline + "Press Enter to Play Again", 220, 300);
+}
+
 
 
         
@@ -157,7 +175,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
         
     
 
-    }
+    
     
     
     
@@ -202,24 +220,21 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
 
          // condition for the the apple of the snake 
        if (Math.abs(xpos[0] - applex) < 20 && Math.abs(ypos[0] - appley) < 20) {
-        // System.out.println("Collision detected!");
-        repaint();
-        applex=r.nextInt(25,750);
-        appley=r.nextInt(100,500);
-        
-        
-        // Add code to handle collision here
-        // For example, you can increase the snake length
-        snakelenght++;
-        
-        //here the speed of the snake is been regulated
-        if(speed<=10){speed=speed-1;}
-        if(speed>10&&speed<=20){speed=speed-2;}
-        if(speed>20&&speed<=50){speed=speed-5;}
-        if(speed>50&&speed<=100){speed=speed-10;} 
-        if(speed>100&&speed<=200){speed=speed-50;}// increase the speed by 10
-        timer.setDelay(speed);
-    }
+    playSound("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\Ding - Sound Effect (HD).wav");  // ← apple.wav
+    repaint();
+    applex = r.nextInt(25, 750);
+    appley = r.nextInt(100, 500);
+    snakelenght++;
+
+    if (speed <= 10) { speed = speed - 1; }
+    if (speed > 10 && speed <= 20) { speed = speed - 2; }
+    if (speed > 20 && speed <= 50) { speed = speed - 5; }
+    if (speed > 50 && speed <= 100) { speed = speed - 10; }
+    if (speed > 100 && speed <= 200) { speed = speed - 50; }
+
+    timer.setDelay(speed);
+}
+
 }
         
         
