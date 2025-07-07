@@ -82,9 +82,9 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
         g.fillRect(23, 13, 1040, 370);
 
         // image of the title
-        ImageIcon c =new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\WhatsApp_Image_2025-07-07_at_16.23.46_56784e00-removebg-preview.png");
+        ImageIcon c =new ImageIcon("WhatsApp_Image_2025-07-07_at_16.23.46_56784e00-removebg-preview.png");
         g.drawImage(c.getImage(), 100, -20, 200, 150, null);
-         c =new ImageIcon("C:\\\\Users\\\\RealS\\\\Documents\\\\GitHub\\\\Snakegame\\\\WhatsApp_Image_2025-07-07_at_16.23.46_56784e00-removebg-preview.png");
+         c =new ImageIcon("WhatsApp_Image_2025-07-07_at_16.23.46_56784e00-removebg-preview.png");
         g.drawImage(c.getImage(), 800, -20, 200, 150, null);
 
         
@@ -117,16 +117,16 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             if (slength[i] == 0) {
     Image headImage = null;
     if (direction == UP) {
-        headImage = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\up.png").getImage(); // Head facing UP
+        headImage = new ImageIcon("up.png").getImage(); // Head facing UP
     g.drawImage(headImage, xpos[0], ypos[0]-30, 50, 50, null);} 
     else if (direction == DOWN) {
-        headImage = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\down.png").getImage(); // Head facing DOWN
+        headImage = new ImageIcon("down.png").getImage(); // Head facing DOWN
     g.drawImage(headImage, xpos[0], ypos[0]+30, 50, 50, null);}
      else if (direction == LEFT) {
-        headImage = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\left.png").getImage(); // Head facing LEFT
+        headImage = new ImageIcon("left.png").getImage(); // Head facing LEFT
     g.drawImage(headImage, xpos[0]-30, ypos[0], 50, 50, null);
 }    else if (direction == RIGHT) {
-        headImage = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\right.png").getImage(); // Head facing RIGHT
+        headImage = new ImageIcon("right.png").getImage(); // Head facing RIGHT
     g.drawImage(headImage, xpos[0]+30, ypos[0], 50, 50, null);}
 
     // g.drawImage(headImage, xpos[0]+, ypos[0], 50, 50, null);
@@ -137,7 +137,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             if(slength[i]>0){
                 
                 Image image;
-                image = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\Screenshot 2025-07-05 172452.png").getImage();
+                image = new ImageIcon("Screenshot 2025-07-05 172452.png").getImage();
                 g.drawImage(image, xpos[ti-i], ypos[ti-i], 50, 50, null);
                 // System.out.println(xpos[ti-i]+" "+ypos[ti-i]);
                 
@@ -149,7 +149,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             
 
             Image image;
-            image = new ImageIcon("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\egg.png").getImage();
+            image = new ImageIcon("egg.png").getImage();
             g.drawImage(image, applex, appley, 50, 50, null);
             // System.out.println(applex+" apple "+appley);
             // System.out.println(xpos[0]+" snake head "+ypos[0]);
@@ -162,7 +162,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
             /// this will die the snake and gameover messge will be showed
             if (xpos[0] < 22 || xpos[0] > 950 || ypos[0] < 90 || ypos[0] > 750) {
     timer.stop();
-    playSound("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\gameover.wav");  // ← gameover.wav
+    playSound("gameover.wav");  // ← gameover.wav
     System.out.println("game over");
     g.setColor(Color.white);
     Font font = new Font("Arial", Font.BOLD, 20);
@@ -232,7 +232,7 @@ public class gamepanel extends JPanel implements KeyListener,ActionListener
 
          // condition for the the apple of the snake 
        if (Math.abs(xpos[0] - applex) < 50 && Math.abs(ypos[0] - appley) < 50) {
-    playSound("C:\\Users\\RealS\\Documents\\GitHub\\Snakegame\\Ding - Sound Effect (HD).wav");  // ← apple.wav
+    playSound("Ding - Sound Effect (HD).wav");  // ← apple.wav
     repaint();
     applex = r.nextInt(25, 750);
     appley = r.nextInt(100, 500);
